@@ -30,7 +30,7 @@ def build_model(lstm_hidden_size=256, num_classes=2, dropout_rate=0.5):
     return model
 
 # Load model
-model_path = 'COMBINED_best_Phase1.keras'
+model_path = r'D:\Pro-jects\ESE major project\COMBINED_best_Phase1.keras'
 model = build_model()
 model.load_weights(model_path)
 
@@ -177,7 +177,7 @@ def make_prediction(video_file):
 # (Keep all the previous imports and functions)
 
 # Streamlit UI
-st.set_page_config(page_title="VARS - Video Analysis", layout="wide")
+st.set_page_config(page_title="Not Ur Face", layout="wide")
 st.markdown("<style>h1{font-size: 45px !important;}</style>", unsafe_allow_html=True)
 
 # Create two columns for header and main content
