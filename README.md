@@ -13,8 +13,6 @@ NotUrFace-AI is a deepfake detection model designed to classify video content as
 6. [How to Use](#how-to-use)
 7. [Training and Evaluation](#training-and-evaluation)
 8. [Results](#results)
-9. [Future Improvements](#future-improvements)
-10. [License](#license)
 
 ---
 
@@ -59,13 +57,8 @@ The model predicts probabilities for two classes:
 
 ## Setup Instructions
 ### Prerequisites
-- Python 3.8+
-- TensorFlow 2.x
-- Keras 3.x
-- NumPy
-- OpenCV
-- Face recognition libraries (e.g., `dlib`, `face_recognition`)
-- Google Colab (optional for training with GPUs)
+- check requirements.txt
+- Google Colab/ Kaggle/ LightningAI (optional for training with GPUs)
 
 ### Installation
 1. Clone the repository:
