@@ -25,7 +25,6 @@ It is particularly useful for:
 - Research in deepfake detection and AI ethics
 
 ---
-
 ## Features
 - **Real-time video classification**: Detects whether a video is real or synthetic.
 - **Frame-based analysis**: Processes video content frame by frame to improve accuracy.
