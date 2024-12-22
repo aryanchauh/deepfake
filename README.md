@@ -27,7 +27,6 @@ It is particularly useful for:
 - Research in deepfake detection and AI ethics
 
 ---
-
 ## Features
 - **Real-time video classification**: Detects whether a video is real or synthetic.
 - **Frame-based analysis**: Processes video content frame by frame to improve accuracy.
@@ -77,45 +76,6 @@ The model predicts probabilities for two classes:
 ---
 
 ## How to Use
-### 1. Preprocess Videos
-Prepare video datasets into real and fake folders:
-```
-./data/
-    Processed_Real/
-    Processed_Synthetic/
-```
-Use the preprocessing script to extract frames:
-```bash
-python preprocess_videos.py --input ./data --output ./preprocessed_data
-```
-
-### 2. Train the Model
-Train the model using the following command:
-```bash
-python train.py --dataset ./preprocessed_data --epochs 10 --batch_size 8
-```
-
-### 3. Test the Model
-To evaluate the model:
-```bash
-python test.py --model model_final.h5 --input ./test_videos
-```
-
-### 4. Real-time Prediction
-Run inference on a single video:
-```bash
-python predict_video.py --model model_final.h5 --video video_input.mp4
-```
-
----
-
-## Training and Evaluation
-- **Batch Size**: 8
-- **Optimizer**: Adam
-- **Loss Function**: Categorical Crossentropy
-- **Metrics**: Accuracy, F1 Score
-
-Model is saved at each epoch with `ModelCheckpoint` for further fine-tuning.
 
 ---
 
