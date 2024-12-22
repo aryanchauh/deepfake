@@ -1,6 +1,8 @@
 # NotUrFace-AI: Deepfake Detection Model
 
 NotUrFace-AI is a deepfake detection model designed to classify video content as real or fake. Leveraging **TensorFlow** for development, it processes video frames and applies advanced machine learning techniques to identify synthetic or manipulated media.
+Click the link below to try the deployed project ⬇️
+https://huggingface.co/spaces/sarvansh/NotUrFace-AI
 
 ---
 
