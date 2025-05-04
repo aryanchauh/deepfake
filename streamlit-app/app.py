@@ -1,4 +1,8 @@
 import streamlit as st
+
+# Must be the first Streamlit command
+st.set_page_config(page_title="Not Ur Face", layout="wide")
+
 import os
 import numpy as np
 import cv2
@@ -12,8 +16,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import base64
 import tempfile
-# TensorFlow log level
+
+# Configure TensorFlow and suppress warnings
+import logging
+logging.getLogger('tensorflow').setLevel(logging.ERROR)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 # Parameters
 TIME_STEPS = 30  # Frames per video
@@ -21,10 +30,13 @@ HEIGHT, WIDTH = 299, 299
 
 # Model builder
 def build_model(lstm_hidden_size=256, num_classes=2, dropout_rate=0.5):
-    with tf.keras.backend.name_scope('model'):  # Add explicit name scope
+    with tf.keras.backend.name_scope('model'):
         inputs = layers.Input(shape=(TIME_STEPS, HEIGHT, WIDTH, 3))
-        base_model = tf.keras.applications.Xception(weights='imagenet', include_top=False, pooling='avg')
-        base_model.trainable = False  # Freeze the base model
+        base_model = tf.keras.applications.Xception(
+            weights='imagenet',  # Use pretrained weights
+            include_top=False,
+            pooling='avg'
+        )
         
         x = layers.TimeDistributed(base_model)(inputs)
         x = layers.LSTM(lstm_hidden_size, return_sequences=False)(x)
@@ -35,9 +47,13 @@ def build_model(lstm_hidden_size=256, num_classes=2, dropout_rate=0.5):
         return model
 
 # Load model
-model_path = r'D:\Pro-jects\ESE major project\COMBINED_best_Phase1.keras'
-model = build_model()
-model.load_weights(model_path)
+try:
+    model_path = 'COMBINED_best_Phase1.keras'
+    model = build_model()
+    model.load_weights(model_path, by_name=True, skip_mismatch=True)
+except Exception as e:
+    st.error(f"Error loading model: {str(e)}")
+    st.error("Please ensure the model file 'COMBINED_best_Phase1.keras' exists in the correct location.")
 
 def preprocess_image(image):
     """
@@ -205,8 +221,8 @@ def generate_thumbnail(video_path, timestamp):
     else:
         return None
 
+# Remove this duplicate st.set_page_config() call
 # Streamlit UI
-st.set_page_config(page_title="Not Ur Face", layout="wide")
 st.markdown("<style>h1{font-size: 45px !important;}</style>", unsafe_allow_html=True)
 
 # Create two columns for header and main content
@@ -310,7 +326,7 @@ video_file = st.file_uploader("Choose a video file", type=["mp4", "mov", "avi"],
 if video_file is not None:
     # Save the uploaded video to a temporary file
     temp_dir = tempfile.mkdtemp()
-    temp_file = os.path.join(temp_dir, f"temp_video.mp4")
+    temp_file = os.path.join(temp_dir, f"01_02__hugging_happy__YVGY8LOK.mp4")
     with open(temp_file, "wb") as f:
         f.write(video_file.read())
     
